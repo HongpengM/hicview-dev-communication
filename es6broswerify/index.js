@@ -4,13 +4,13 @@ import axios from 'axios'
 main()
 
 async function retrieveUCSCData(params, axiosInstance){
-  const response = await axios.get('https://api.genome.ucsc.edu/getData/track?genome=hg38;track=gold;', params=params)
+  const response = await axiosInstance.get('https://api.genome.ucsc.edu/getData/track?genome=hg38;track=gold;', params=params)
   return response.data
 }
 
 async function main(){
   const testInstance = axios.create({
-    timeout:1000,
+    //timeout:20000,
     headers:{'Access-Control-Allow-Origin': '*'} // Set Client CORS header, however you still need to add server CORS permission
   })
   let testParams = {
@@ -22,7 +22,7 @@ async function main(){
   }
   let data;
   try{
-    data = await retrieveUCSCData(testParams)
+    data = await retrieveUCSCData(testParams, testInstance)
   } catch(err) {
     console.log("Problem happened when retrieving the data")
     console.log(err)

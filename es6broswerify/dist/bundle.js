@@ -25,7 +25,7 @@ function _retrieveUCSCData() {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _axios["default"].get('https://api.genome.ucsc.edu/getData/track?genome=hg38;track=gold;', params = params);
+            return axiosInstance.get('https://api.genome.ucsc.edu/getData/track?genome=hg38;track=gold;', params = params);
 
           case 2:
             response = _context.sent;
@@ -55,7 +55,7 @@ function _main() {
         switch (_context2.prev = _context2.next) {
           case 0:
             testInstance = _axios["default"].create({
-              timeout: 1000,
+              //timeout:20000,
               headers: {
                 'Access-Control-Allow-Origin': '*' // Set Client CORS header, however you still need to add server CORS permission
 
@@ -64,11 +64,13 @@ function _main() {
             testParams = {
               track: 'gold',
               genome: 'hg38',
-              chrom: 'chr1'
+              chrom: 'chr1',
+              start: 47000,
+              end: 48000
             };
             _context2.prev = 2;
             _context2.next = 5;
-            return retrieveUCSCData(testParams);
+            return retrieveUCSCData(testParams, testInstance);
 
           case 5:
             data = _context2.sent;
