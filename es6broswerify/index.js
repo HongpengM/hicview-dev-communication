@@ -16,7 +16,9 @@ async function main(){
   let testParams = {
     track:'gold',
     genome:'hg38',
-    chrom:'chr1'
+    chrom:'chr1',
+    start:47000,
+    end:48000
   }
   let data;
   try{

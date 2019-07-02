@@ -85,8 +85,9 @@ function _main() {
             console.log('Here retrieved');
             console.log('Data Retrieved, Demo Below');
             console.log(data);
-            demoDiv = document.createElement('div');
-            demoDiv.innerHTML = '' + data;
+            demoDiv = document.createElement('div'); // Convert data to json string and mount to a `div` element
+
+            demoDiv.innerHTML = '' + JSON.stringify(data);
             console.log('' + JSON.stringify(data));
             console.log(demoDiv);
             document.body.appendChild(demoDiv);
