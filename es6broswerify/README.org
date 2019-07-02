@@ -1,0 +1,19 @@
+*  Setup commands
+** Globally install gulp and browserify
+   gulp and broswerify are required in our project to pack and convert es6/7 code to browser compatibale es5 code
+   #+BEGIN_SRC sh
+   npm install -g gulp browserify
+   #+END_SRC
+** Install the dependencies
+   #+BEGIN_SRC sh
+   npm i
+   #+END_SRC
+** Run the code (Option 1)
+   #+BEGIN_SRC sh
+   npm run dev
+   #+END_SRC
+** Run the code (Option 2)
+   #+BEGIN_SRC sh
+   gulp --task
+   # then open the `index.html` in the project directory, please ensure that your browser has installed CORS-allowing plugins. 
+   #+END_SRC

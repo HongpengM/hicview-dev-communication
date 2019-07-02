@@ -18,12 +18,23 @@ async function main(){
     genome:'hg38',
     chrom:'chr1'
   }
-  let data = await retrieveUCSCData(testParams)
+  let data;
+  try{
+    data = await retrieveUCSCData(testParams)
+  } catch(err) {
+    console.log("Problem happened when retrieving the data")
+    console.log(err)
+    
+  }
+  
   console.log('Here retrieved')
   console.log('Data Retrieved, Demo Below')
   console.log(data)
   let demoDiv = document.createElement('div')
-  demoDiv.innerHTML = data.stringify()
+  // Convert data to json string and mount to a `div` element
+  demoDiv.innerHTML = '' + JSON.stringify(data)
+  console.log('' + JSON.stringify(data))
+  console.log(demoDiv)
   document.body.appendChild(demoDiv)
 }
 

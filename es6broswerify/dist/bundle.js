@@ -1,5 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
@@ -9,6 +9,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _axios = _interopRequireDefault(require("axios"));
 
+main();
+
 function retrieveUCSCData(_x, _x2) {
   return _retrieveUCSCData.apply(this, arguments);
 }
@@ -17,7 +19,7 @@ function _retrieveUCSCData() {
   _retrieveUCSCData = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
   _regenerator["default"].mark(function _callee(params, axiosInstance) {
-    var data;
+    var response;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -26,8 +28,8 @@ function _retrieveUCSCData() {
             return _axios["default"].get('https://api.genome.ucsc.edu/getData/track?genome=hg38;track=gold;', params = params);
 
           case 2:
-            data = _context.sent;
-            return _context.abrupt("return", data);
+            response = _context.sent;
+            return _context.abrupt("return", response.data);
 
           case 4:
           case "end":
@@ -55,7 +57,8 @@ function _main() {
             testInstance = _axios["default"].create({
               timeout: 1000,
               headers: {
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*' // Set Client CORS header, however you still need to add server CORS permission
+
               }
             });
             testParams = {
@@ -63,29 +66,40 @@ function _main() {
               genome: 'hg38',
               chrom: 'chr1'
             };
-            _context2.next = 4;
+            _context2.prev = 2;
+            _context2.next = 5;
             return retrieveUCSCData(testParams);
 
-          case 4:
+          case 5:
             data = _context2.sent;
+            _context2.next = 12;
+            break;
+
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](2);
+            console.log("Problem happened when retrieving the data");
+            console.log(_context2.t0);
+
+          case 12:
             console.log('Here retrieved');
             console.log('Data Retrieved, Demo Below');
             console.log(data);
             demoDiv = document.createElement('div');
-            demoDiv.innerHTML = str(data);
+            demoDiv.innerHTML = '' + data;
+            console.log('' + JSON.stringify(data));
+            console.log(demoDiv);
             document.body.appendChild(demoDiv);
 
-          case 11:
+          case 20:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2);
+    }, _callee2, null, [[2, 8]]);
   }));
   return _main.apply(this, arguments);
 }
-
-main();
 
 },{"@babel/runtime/helpers/asyncToGenerator":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/regenerator":4,"axios":5}],2:[function(require,module,exports){
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
